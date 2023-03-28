@@ -1,4 +1,6 @@
 [workspace]
 members = [
-    "crates/flight-simulator"
+    "crates/sb-flight-simulator",
+    "crates/sb-navigation",
+    "crates/sb-constants",
 ]

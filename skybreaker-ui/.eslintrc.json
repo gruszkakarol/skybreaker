@@ -1,0 +1,37 @@
+{
+  "plugins": [
+    "@typescript-eslint",
+    "json-format"
+  ],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "@next/next/no-html-link-for-pages": [
+      "error",
+      "skybreaker-ui/app"
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ]
+  },
+  "settings": {
+    "next": {
+      "rootDir": "./skybreaker-ui/"
+    },
+    "json/sort-package-json": "standard",
+    "json/ignore-files": [
+      "**/package-lock.json"
+    ],
+    "json/json-with-comments-files": [
+      "**/tsconfig.json",
+      ".vscode/**"
+    ]
+  }
+}
