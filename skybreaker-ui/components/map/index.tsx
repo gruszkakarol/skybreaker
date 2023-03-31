@@ -1,7 +1,7 @@
 import 'leaflet/dist/leaflet.css'
 import dynamic from 'next/dynamic'
 import { DEFAULT_GEO_POSITION, DEFAULT_GEO_ZOOM } from '../../config/constants';
-import { GeoPosition } from '@/domain';
+import { GeoPosition } from '@/store';
 
 const MapLoader = () => (
     <div style={{ textAlign: 'center', paddingTop: 20 }}>

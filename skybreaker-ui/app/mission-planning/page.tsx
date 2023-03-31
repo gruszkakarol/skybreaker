@@ -3,13 +3,16 @@
 import {
   Box, HStack,
 } from '@chakra-ui/react';
-import { Menu } from './menu';
+import { WaypointsPath } from '../../components/map/waypoints-path';
 import { MissionCreator } from './mission-creator';
+import { useMissionPlanningStore } from '@/store/mission-planning';
+import { WaypointsList } from '@/components/waypoints-list';
 import { Map } from '@/components/map';
 import { useGeoLocation } from '@/utils/hooks';
 
 function MissionPlanning() {
   const userLocation = useGeoLocation();
+  const waypoints = useMissionPlanningStore(state => state.waypoints);
 
   return (
     <HStack
@@ -18,11 +21,12 @@ function MissionPlanning() {
       width="100vw"
     >
       <Box height="100%" minWidth="25%">
-        <Menu />
+        <WaypointsList waypoints={waypoints} />
       </Box>
       <Box>
         <Map startingPosition={userLocation}>
           <MissionCreator />
+          <WaypointsPath waypoints={waypoints} />
         </Map>
       </Box>
     </HStack>

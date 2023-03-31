@@ -1,13 +1,13 @@
-import { useMapEvents } from "react-leaflet"
+import { useMapEvent } from "react-leaflet"
+import { useMissionPlanningStore } from "../../store/mission-planning";
 
 export function MissionCreator() {
-    const map = useMapEvents({
-        click: () => {
-            map.locate()
-        },
-        locationfound: (location) => {
-            console.log('location found:', location)
-        },
-    })
+
+    const { addWaypoint } = useMissionPlanningStore(state => state);
+
+    useMapEvent("click", (e) => {
+        addWaypoint([e.latlng.lat, e.latlng.lng]);
+    });
+
     return null
 }

@@ -1,0 +1,10 @@
+{
+  "mission-action-type": {
+    "take-off": "Take Off",
+    "land": "Land",
+    "move": "Move"
+  },
+  "latitude": "Latitude",
+  "longitude": "Longitude",
+  "remove-waypoint": "Remove Waypoint"
+}
