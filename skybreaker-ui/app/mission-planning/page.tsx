@@ -21,9 +21,7 @@ function MissionPlanning() {
         <Menu />
       </Box>
       <Box>
-
         <Map startingPosition={userLocation}>
-
           <MissionCreator />
         </Map>
       </Box>

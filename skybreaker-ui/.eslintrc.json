@@ -16,6 +16,10 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": "off",
     "import/no-unresolved": "off",
+    "react/jsx-newline": [
+      "error",
+      { "prevent": true, "allowMultilines": false }
+    ],
     "no-multiple-empty-lines": [
       "error",
       {
