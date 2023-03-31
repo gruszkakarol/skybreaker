@@ -1,19 +1,27 @@
 import 'leaflet/dist/leaflet.css'
 import dynamic from 'next/dynamic'
-import { TileLayer } from 'react-leaflet';
-import { GeoPosition } from '@/domain';
 import { DEFAULT_GEO_POSITION, DEFAULT_GEO_ZOOM } from '../../config/constants';
-import { useEffect, useRef } from 'react';
+import { GeoPosition } from '@/domain';
+
+const MapLoader = () => (
+    <div style={{ textAlign: 'center', paddingTop: 20 }}>
+        Chargement…
+    </div>
+);
 
 const MapContainer = dynamic(
     () => import('react-leaflet').then(mod => mod.MapContainer),
     {
         ssr: false,
-        loading: () => (
-            <div style={{ textAlign: 'center', paddingTop: 20 }}>
-                Chargement…
-            </div>
-        )
+        loading: MapLoader
+    }
+)
+
+const TileLayer = dynamic(
+    () => import('react-leaflet').then(mod => mod.TileLayer),
+    {
+        ssr: false,
+        loading: MapLoader
     }
 )
 
@@ -29,7 +37,10 @@ export const Map: React.FC<MapProps> = ({ width = "100vw", height = "100vh", zoo
 
     return (
         <MapContainer
-            center={startingPosition} zoom={zoom} scrollWheelZoom={true} style={{ height, width }}>
+            center={startingPosition}
+            scrollWheelZoom={true}
+            style={{ height, width }}
+            zoom={zoom}>
             <TileLayer
 
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
