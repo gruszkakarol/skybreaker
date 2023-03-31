@@ -1,18 +1,21 @@
 {
-  "plugins": [
-    "@typescript-eslint",
-    "json-format"
-  ],
+  "plugins": ["@typescript-eslint", "unused-imports"],
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
   "rules": {
-    "@next/next/no-html-link-for-pages": [
-      "error",
-      "skybreaker-ui/app"
-    ],
+    "react/jsx-sort-props": "error",
+    "unused-imports/no-unused-imports": "error",
+    "@next/next/no-html-link-for-pages": ["error", "app"],
+    "no-unused-vars": ["error"],
+    "import/prefer-default-export": "off",
+    "import/extensions": "off",
+    "import/order": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": "off",
+    "import/no-unresolved": "off",
     "no-multiple-empty-lines": [
       "error",
       {
@@ -24,14 +27,6 @@
   "settings": {
     "next": {
       "rootDir": "./skybreaker-ui/"
-    },
-    "json/sort-package-json": "standard",
-    "json/ignore-files": [
-      "**/package-lock.json"
-    ],
-    "json/json-with-comments-files": [
-      "**/tsconfig.json",
-      ".vscode/**"
-    ]
+    }
   }
 }
