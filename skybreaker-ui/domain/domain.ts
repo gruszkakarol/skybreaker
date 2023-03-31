@@ -1,21 +1,21 @@
 import { GeoPosition } from "./position";
 
-export enum MissionActionType {
+export enum MissionActionEnum {
   TakeOff = "take-off",
   Move = "move",
   Land = "land",
 }
 
 export type MissionStart = {
-  type: MissionActionType.TakeOff;
+  type: MissionActionEnum.TakeOff;
 };
 
 export type MissionMove = {
-  type: MissionActionType.Move;
+  type: MissionActionEnum.Move;
 };
 
 export type MissionLand = {
-  type: MissionActionType.Land;
+  type: MissionActionEnum.Land;
 };
 
 export type MissionAction = MissionStart | MissionMove | MissionLand;
