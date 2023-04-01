@@ -20,7 +20,7 @@ function MissionPlanning() {
       spacing={0}
       width="100vw"
     >
-      <Box height="100%" minWidth="25%">
+      <Box height="100%" maxHeight="100vh" minWidth="25%" overflowY="auto">
         <WaypointsList waypoints={waypoints} />
       </Box>
       <Box>

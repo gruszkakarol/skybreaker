@@ -3,6 +3,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { CacheProvider } from '@chakra-ui/next-js'
 import "@/locales";
+import { theme } from '../config/theme';
 
 export default function RootLayout({
   children,
@@ -14,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <CacheProvider>
-          <ChakraProvider>
+          <ChakraProvider theme={theme}>
             {children}
           </ChakraProvider>
         </CacheProvider>

@@ -1,11 +1,19 @@
-import { Box, Card, CardBody, CardFooter, CardHeader, Heading, IconButton, Stack, StackDivider, Text, VStack } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, HStack, Heading, IconButton, Input, Select, VStack } from "@chakra-ui/react";
 import { useTranslation } from 'react-i18next';
 import { DeleteIcon } from "@chakra-ui/icons";
 import { MissionWaypoint } from "../domain/domain";
 import { useMissionPlanningStore } from "../store/mission-planning";
+import { MISSION_ACTION_SETTINGS } from "../config/waypoints";
+import { MissionActionEnum } from "../domain/domain";
 
 export type WaypointsListProps = {
     waypoints: MissionWaypoint[]
+};
+
+const ActionsOptions = () => {
+    const { t } = useTranslation();
+
+    return (<>{Object.values(MissionActionEnum).map((action) => <option key={action} value={action}>{t(`mission-action.type.${action}`)}</option>)}</>)
 };
 
 export const WaypointsList: React.FC<WaypointsListProps> = ({ waypoints }) => {
@@ -14,46 +22,46 @@ export const WaypointsList: React.FC<WaypointsListProps> = ({ waypoints }) => {
     const { removeWaypoint } = useMissionPlanningStore();
 
     return (
-        <VStack height="100%" spacing={4}>
-            {waypoints.map(({ position, type }) => {
+        <Accordion allowMultiple>
+            {waypoints.map((waypoint) => {
+                const { position, type } = waypoint;
+                const { icon, bgColor } = MISSION_ACTION_SETTINGS[type];
+                const [latitude, longitude] = position;
+
                 return (
-                    <Card bgColor="gray.600" color="gray.100" key={`${position[0]}${position[1]}`} spac width="100%">
-                        <CardHeader>
-                            <Heading size="xs" textTransform="uppercase">
-                                {t(`mission-action-type.${type}`)}
-                            </Heading>
-                        </CardHeader>
-                        <CardBody>
-                            <Stack divider={<StackDivider />} spacing={1}>
-                                <Box>
-                                    <Heading size="xs">
-                                        {t("latitude")}:
+                    <AccordionItem alignItems="stretch" border="none" display="flex" flexWrap="nowrap" key={`${position[0]}${position[1]}${type}`}>
+                        <Box bgColor={bgColor} fontSize="xl" width="4" />
+                        <Box borderBottom="1px solid" borderColor="gray.300" flex="1">
+                            <HStack>
+                                <AccordionButton>
+                                    <Heading flex="1" size="s" textAlign="left">
+                                        {t(`mission-action.type.${type}`)}
                                     </Heading>
-                                    <Text>
-                                        {position[0]}
-                                    </Text>
-                                </Box>
-                                <Box>
-                                    <Heading size="xs">
-                                        {t("longitude")}:
-                                    </Heading>
-                                    <Text>
-                                        {position[1]}
-                                    </Text>
-                                </Box>
-                            </Stack>
-                        </CardBody>
-                        <CardFooter>
-                            <IconButton
-                                aria-label={t("remove-waypoint")}
-                                colorScheme="red"
-                                icon={<DeleteIcon />}>
-                                {t("remove")}
-                            </IconButton>
-                        </CardFooter>
-                    </Card>
+                                    <AccordionIcon />
+                                </AccordionButton>
+                            </HStack>
+                            <AccordionPanel>
+                                <VStack alignItems="stretch">
+                                    <VStack>
+                                        <Heading size="xs" width="100%">{t("latitude")}</Heading>
+                                        <Input defaultValue={latitude} variant="flushed" />
+                                    </VStack>
+                                    <VStack>
+                                        <Heading size="xs" width="100%">{t("longitude")}</Heading>
+                                        <Input defaultValue={longitude} variant="flushed" />
+                                    </VStack>
+                                    <HStack>
+                                        <Select defaultValue={type} variant="flushed" >
+                                            <ActionsOptions />
+                                        </Select>
+                                        <IconButton aria-label={t("delete")} colorScheme="red" icon={<DeleteIcon />} onClick={() => removeWaypoint(waypoint)} />
+                                    </HStack>
+                                </VStack>
+                            </AccordionPanel>
+                        </Box>
+                    </AccordionItem>
                 )
             })}
-        </VStack >
+        </Accordion >
     )
 } 

@@ -1,10 +1,14 @@
 {
-  "mission-action-type": {
-    "take-off": "Take Off",
-    "land": "Land",
-    "move": "Move"
+  "mission-action": {
+    "type": {
+      "take-off": "Start",
+      "land": "Land",
+      "move": "Move"
+    },
+    "position": "{position[0]}, {position[1]}"
   },
   "latitude": "Latitude",
   "longitude": "Longitude",
-  "remove-waypoint": "Remove Waypoint"
+  "remove-waypoint": "Remove Waypoint",
+  "delete": "Delete"
 }
