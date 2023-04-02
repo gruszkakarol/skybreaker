@@ -26,4 +26,6 @@ export type MissionWaypoint = MissionAction & {
 
 export type Mission = {
   waypoints: MissionWaypoint[];
+  id: string;
+  name: string;
 };

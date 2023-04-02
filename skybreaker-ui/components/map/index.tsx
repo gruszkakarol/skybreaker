@@ -33,7 +33,7 @@ export type MapProps = {
     children?: React.ReactNode
 }
 
-export const Map: React.FC<MapProps> = ({ width = "75vw", height = "100vh", zoom = DEFAULT_GEO_ZOOM, startingPosition = DEFAULT_GEO_POSITION, children }) => {
+export const Map: React.FC<MapProps> = ({ width = "70vw", height = "95vh", zoom = DEFAULT_GEO_ZOOM, startingPosition = DEFAULT_GEO_POSITION, children }) => {
 
     return (
         <MapContainer

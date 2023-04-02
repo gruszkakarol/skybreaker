@@ -7,8 +7,18 @@
     },
     "position": "{position[0]}, {position[1]}"
   },
+  "navigation": {
+    "flight-control": "Flight Control",
+    "mission-planning": "Mission Planning"
+  },
   "latitude": "Latitude",
   "longitude": "Longitude",
   "remove-waypoint": "Remove Waypoint",
-  "delete": "Delete"
+  "delete": "Delete",
+  "no-waypoints": "Click on the map to add waypoints to your mission.",
+  "save-mission": "Save Mission",
+  "save-mission-description": "Are you sure? This will save the mission with selected waypoints. You can also save and start the mission. This will redirect you to the flight control page where you will be able to configure your quadcopter.",
+  "save": "Save",
+  "cancel": "Cancel",
+  "save-and-start": "Save and start"
 }

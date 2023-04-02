@@ -21,11 +21,19 @@ export const WaypointsList: React.FC<WaypointsListProps> = ({ waypoints }) => {
 
     const { removeWaypoint } = useMissionPlanningStore();
 
+    if (waypoints.length === 0) {
+        return (
+            <Box padding={4} textAlign="center" width="100%">
+                <Heading size="xs">{t("no-waypoints")}</Heading>
+            </Box>
+        )
+    }
+
     return (
         <Accordion allowMultiple>
             {waypoints.map((waypoint) => {
                 const { position, type } = waypoint;
-                const { icon, bgColor } = MISSION_ACTION_SETTINGS[type];
+                const { bgColor } = MISSION_ACTION_SETTINGS[type];
                 const [latitude, longitude] = position;
 
                 return (
@@ -51,7 +59,7 @@ export const WaypointsList: React.FC<WaypointsListProps> = ({ waypoints }) => {
                                         <Input defaultValue={longitude} variant="flushed" />
                                     </VStack>
                                     <HStack>
-                                        <Select defaultValue={type} variant="flushed" >
+                                        <Select defaultValue={type} disabled variant="flushed">
                                             <ActionsOptions />
                                         </Select>
                                         <IconButton aria-label={t("delete")} colorScheme="red" icon={<DeleteIcon />} onClick={() => removeWaypoint(waypoint)} />

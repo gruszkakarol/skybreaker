@@ -1,11 +1,21 @@
 import { create } from "zustand";
-import { MissionActionEnum, MissionWaypoint } from "../../domain/domain";
+import {
+  Mission,
+  MissionActionEnum,
+  MissionWaypoint,
+} from "../../domain/domain";
 import { GeoPosition } from "../../domain/position";
 
 export type MissionPlanningStore = {
   waypoints: MissionWaypoint[];
   addWaypoint: (position: GeoPosition) => void;
   removeWaypoint: (waypoint: MissionWaypoint) => void;
+
+  saveMission: (mission: Mission) => void;
+  saveMissionAndStart: (mission: Mission) => Promise<void>;
+
+  missions: Mission[];
+  selectedMission: Mission | null;
 };
 
 export const useMissionPlanningStore = create<MissionPlanningStore>((set) => ({
@@ -38,4 +48,15 @@ export const useMissionPlanningStore = create<MissionPlanningStore>((set) => ({
     set((state) => ({
       waypoints: state.waypoints.filter((w) => w !== waypoint),
     })),
+  missions: [],
+  selectedMission: null,
+  saveMission: (mission) =>
+    set((state) => ({ missions: [...state.missions, mission] })),
+  saveMissionAndStart: async (mission) =>
+    set((state) => {
+      state.saveMission(mission);
+      return {
+        selectedMission: mission,
+      };
+    }),
 }));
